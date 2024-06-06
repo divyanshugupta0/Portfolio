@@ -132,7 +132,7 @@ $(document).ready(function(){
           messageElement.textContent = data.choices[0].message.content.trim();
       }).catch(() => {
           messageElement.classList.add("error");
-          messageElement.textContent = "Oops! Something went wrong. Please try again.";
+          messageElement.textContent = "Oops! Something went wrong. Please try again.","SORRY!,We are not available right now";
       }).finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
   }
   

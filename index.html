@@ -14,7 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js"></script>
 
 <!----chat bot-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -271,7 +271,7 @@ As a freelancer, I thrive on the dynamic nature of my work. Each project present
                         <div class="field textarea">
                             <textarea cols="30" rows="10" placeholder="Message.." name="message" required></textarea>
                         </div>
-                        <div class="g-recaptcha" data-sitekey="6LcV1_gpAAAAAPC8gS0AGywD_J4oW-uOQdorjBnW"></div>
+                        <div class="cf-turnstile" data-sitekey="0x4AAAAAAAcjQTU5bUoKnGPS" data-callback="javascriptCallback"></div>
                         <div class="button-area">
                             <button type="submit">Send message</button>
                         </div>

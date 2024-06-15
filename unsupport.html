@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unsupported Devices</title>
+    <body>
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <p>Unable to Process your request.</p>
+          <button class="close">close</button>
+        </div>
+      </div>
+      </body>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .message {
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+        }
+         /* The Modal (background) */
+         .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            justify-content: center;
+            align-items: center;
+            font-optical-sizing: auto;
+            font-weight: 600;
+            font-size: 1.3em;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: none; /* Enable scroll if needed */
+            background-color: red; /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+        
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #ffffff;
+            margin: 75% auto; /* 15% from the top and centered */
+          
+            padding: 20px;
+            border-radius: 30px;
+            border: 2px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            height:130px;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // Function to open the modal
+    function openModal() {
+      modal.style.display = "block";
+    }
+
+    // Automatically open the modal after a delay
+    window.onload = function() {
+      setTimeout(openModal, 30); // 3000 milliseconds = 3 seconds
+    };
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    };
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    };
+</script>
+<body>
+    <div class="message">
+        This site doesn't support mobile phones or tablets.<br>
+        Please! use PC to access
+    </div>
+    <button class="button2"><a href="troubleshoot.html">Troubleshoot</a></button>
+    <style>.button2{
+        color: #aaa;
+        font-size: 1.1em;
+        font-weight: bold;
+    }
+    .button2:hover,
+    .button2:focus{
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+        outline: none;
+    }
+    .button2:active {
+        background-color: #004494;
+    }
+</style>
+</body>
+</html>

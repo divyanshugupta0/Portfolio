@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troubleshooting Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        h1 {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section p {
+            margin: 10px 0;
+        }
+        .faq {
+            margin: 20px 0;
+        }
+        .faq-item {
+            margin-bottom: 10px;
+        }
+        .faq-item h3 {
+            margin: 0;
+        }
+        .contact-info {
+            background-color: #eee;
+            padding: 10px;
+            border-left: 4px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Troubleshooting Guide</h1>
+
+        <div class="section">
+            <h2>Common Issues</h2>
+            <ul>
+                <li>Page not loading</li>
+                <li>Unable to login</li>
+                <li>Website running slow</li>
+                <li>Broken links</li>
+                <li>Form submission errors</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Troubleshooting Steps</h2>
+            <div class="faq">
+                <div class="faq-item">
+                    <h3>1. Page not loading</h3>
+                    <p>Ensure your internet connection is active. Try refreshing the page or clearing your browser cache. If the issue persists, try accessing the website from a different browser or device.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>2. Unable to login</h3>
+                    <p>Check if you are entering the correct username and password. Ensure that your Caps Lock is off. If you've forgotten your password, use the "Forgot Password" link to reset it.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>3. Website running slow</h3>
+                    <p>Clear your browser cache and cookies. Ensure you are using the latest version of your browser. Close any unnecessary tabs or applications running on your device.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>4. Broken links</h3>
+                    <p>If you encounter broken links, please report them to us using the contact information below. Provide details about the page where the link was found and the link itself.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>5. Form submission errors</h3>
+                    <p>Ensure all required fields are filled out correctly. Check for any error messages that indicate specific issues. If the problem persists, try using a different browser or device.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section contact-info">
+            <h2>Contact Us</h2>
+            <p>If you continue to experience issues, please contact our support team for assistance.</p>
+            <p>Email: Temporarily Disabled</p>
+            <form action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="2def5933-b1c7-4028-8655-c2c6b2bf08e2">
+            <p>fill your issues:</p>
+            <div class="field">
+                ~> <input type="text" placeholder="Name" name="name" required>
+            </div>
+            <div class="field">
+                ~><input type="email" placeholder="E-mail" name="email" required>
+            </div>
+
+            <div class="field textarea">
+                <textarea cols="30" rows="10" placeholder="Issue...." name="message" required></textarea>
+            </div>
+            <button type="submit">Submit</button>
+            </form>
+            <p>Phone: Unavailable</p>
+            <p>Support Hours: Monday - Friday, 9:00 AM - 5:00 PM</p>
+        </div>
+    </div>
+</body>
+</html>

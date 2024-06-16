@@ -340,10 +340,10 @@ As a freelancer, I thrive on the dynamic nature of my work. Each project present
             // Regular expression to detect scripting, CSS, JavaScript, and HTML commands
             const forbiddenPattern = /<.*?>|<\/.*?>|<script.*?>.*?<\/script>|<style.*?>.*?<\/style>|<.*?javascript:.*?>|<.*?on.*?=.*?>/gi;
 
-            if (input1 === '' || input2 === '' || input3 === '') {
+            if (input1 === '' || input2 === '' || input3 === '' || input4 === '') {
                 errorMessage.textContent = 'Please fill in all the fields.';
                 successMessage.textContent = '';
-            } else if (forbiddenPattern.test(input1) || forbiddenPattern.test(input2) || forbiddenPattern.test(input3)) {
+            } else if (forbiddenPattern.test(input1) || forbiddenPattern.test(input2) || forbiddenPattern.test(input3)) || forbiddenPattern.test(input4)) {
                 errorMessage.textContent = 'Forbidden commands detected.';
                 alert("Warning!, Please don't use commands in the text boxes Otherwise you will be blocked.")
                 successMessage.textContent = '';

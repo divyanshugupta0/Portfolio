@@ -271,12 +271,11 @@ As a freelancer, I thrive on the dynamic nature of my work. Each project present
                         <div class="field textarea">
                             <textarea cols="30" rows="10" placeholder="Message.." name="message" id="input4" required></textarea>
                         </div>
-                        <div class="cf-turnstile" data-sitekey="0x4AAAAAAAcjQTU5bUoKnGPS" data-callback="javascriptCallback"></div>
                         <div class="button-area">
                             <button type="submit" onclick="checkAndSubmit()">Send message</button>
-                            <p id="error-message" style="color:red;"></p>
-                <p id="success-message" style="color:green;"></p>
                         </div>
+                        <p id="error-message" style="color:red;"></p>
+                        <p id="success-message" style="color:green;"></p>
                     </form>
                 </div>
             </div>
@@ -313,27 +312,12 @@ As a freelancer, I thrive on the dynamic nature of my work. Each project present
   </div>
 
 
-
-
-<!-- Hotjar Tracking Code for Site 4974924 (name missing) -->
-<script>
-    (function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:4974924,hjsv:6};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
-    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-</script>
-
-
     <script>
         function checkAndSubmit() {
             const input1 = document.getElementById('input1').value;
             const input2 = document.getElementById('input2').value;
             const input3 = document.getElementById('input3').value;
-            const input3 = document.getElementById('input4').value;
+            const input4 = document.getElementById('input4').value;
             const errorMessage = document.getElementById('error-message');
             const successMessage = document.getElementById('success-message');
 

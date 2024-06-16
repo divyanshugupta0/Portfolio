@@ -266,7 +266,7 @@ As a freelancer, I thrive on the dynamic nature of my work. Each project present
                             </div>
                         </div>
                         <div class="field">
-                            <input type="phone" maxlength="10" placeholder="Contact No." name="Contact" id="input3" required>
+                            <input type="tel" maxlength="10" placeholder="Contact No." name="Contact" id="input3" required>
                         </div>
                         <div class="field textarea">
                             <textarea cols="30" rows="10" placeholder="Message.." name="message" id="input4" required></textarea>
@@ -274,10 +274,9 @@ As a freelancer, I thrive on the dynamic nature of my work. Each project present
                         <div class="cf-turnstile" data-sitekey="0x4AAAAAAAcjQTU5bUoKnGPS" data-callback="javascriptCallback"></div>
                         <div class="button-area">
                             <button type="submit" onclick="checkAndSubmit()">Send message</button>
-                            
-                        </div>
-                        <p id="error-message" style="color:red;"></p>
+                            <p id="error-message" style="color:red;"></p>
                 <p id="success-message" style="color:green;"></p>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -334,6 +333,7 @@ As a freelancer, I thrive on the dynamic nature of my work. Each project present
             const input1 = document.getElementById('input1').value;
             const input2 = document.getElementById('input2').value;
             const input3 = document.getElementById('input3').value;
+            const input3 = document.getElementById('input4').value;
             const errorMessage = document.getElementById('error-message');
             const successMessage = document.getElementById('success-message');
 
@@ -350,6 +350,7 @@ As a freelancer, I thrive on the dynamic nature of my work. Each project present
                 document.getElementById('input1').value = '';
                 document.getElementById('input2').value = '';
                 document.getElementById('input3').value = '';
+                document.getElementById('input4').value = '';
             } else {
                 errorMessage.textContent = '';
                 submitForm();

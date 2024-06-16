@@ -273,7 +273,7 @@ As a freelancer, I thrive on the dynamic nature of my work. Each project present
                         </div>
                         <div class="cf-turnstile" data-sitekey="0x4AAAAAAAcjQTU5bUoKnGPS" data-callback="javascriptCallback"></div>
                         <div class="button-area">
-                            <button type="submit">Send message</button>
+                            <button type="submit" onclick="checkAndSubmit()">Send message</button>
                         </div>
                     </form>
                 </div>
@@ -324,6 +324,64 @@ As a freelancer, I thrive on the dynamic nature of my work. Each project present
         a.appendChild(r);
     })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
 </script>
+
+
+    <script>
+        function checkAndSubmit() {
+            const input1 = document.getElementById('input1').value;
+            const input2 = document.getElementById('input2').value;
+            const input3 = document.getElementById('input3').value;
+            const errorMessage = document.getElementById('error-message');
+            const successMessage = document.getElementById('success-message');
+
+            // Regular expression to detect scripting, CSS, JavaScript, and HTML commands
+            const forbiddenPattern = /<.*?>|<\/.*?>|<script.*?>.*?<\/script>|<style.*?>.*?<\/style>|<.*?javascript:.*?>|<.*?on.*?=.*?>/gi;
+
+            if (input1 === '' || input2 === '' || input3 === '') {
+                errorMessage.textContent = 'Please fill in all the fields.';
+                successMessage.textContent = '';
+            } else if (forbiddenPattern.test(input1) || forbiddenPattern.test(input2) || forbiddenPattern.test(input3)) {
+                errorMessage.textContent = 'Forbidden commands detected.';
+                alert("Warning!, Please don't use commands in the text boxes Otherwise you will be blocked.")
+                successMessage.textContent = '';
+                document.getElementById('input1').value = '';
+                document.getElementById('input2').value = '';
+                document.getElementById('input3').value = '';
+            } else {
+                errorMessage.textContent = '';
+                submitForm();
+            }
+        }
+
+        function submitForm() {
+            const form = document.getElementById('myForm');
+            const formData = new FormData(form);
+            const successMessage = document.getElementById('success-message');
+            const errorMessage = document.getElementById('error-message');
+
+            fetch(form.action, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    successMessage.textContent = 'submitted successfully!';
+                    alert("submitted successfully!");
+                    errorMessage.textContent = '';
+                    form.reset();
+                } else {
+                    return response.json().then(data => {
+                        throw new Error(data.message || 'Form submission failed');
+                    });
+                }
+            }).catch(error => {
+                errorMessage.textContent = error.message;
+                successMessage.textContent = '';
+            });
+        }
+    </script>
 
 
 

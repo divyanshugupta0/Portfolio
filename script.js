@@ -184,7 +184,6 @@ $(document).ready(function(){
 function isMobile() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
-
 // Redirect if the user is accessing from a mobile device
 function redirectIfMobile() {
     if (isMobile()) {
@@ -195,7 +194,6 @@ function redirectIfMobile() {
 
 // Call the function to check and redirect on page load
 window.onload = redirectIfMobile;
-
 
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
     window.location.href = "unsupport.html";

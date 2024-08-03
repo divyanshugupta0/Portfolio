@@ -96,34 +96,11 @@
         </div>
     </div>
     <script>
-        function startVerification() {
-            // Initial verification
-            setTimeout(function() {
-                document.getElementById('loader').style.display = 'none';
-                document.getElementById('checkmark').style.display = 'block';
-                document.getElementById('status').innerText = 'Successfully verified!';
-                document.getElementById('loading-text').style.display = 'none';
-                redirectAfterInterval();
-            }, 5000); // Change this interval to match your verification time
-        }
-
-        // Function to redirect after a certain time interval
-        function redirectAfterInterval() {
-            var interval = 2000; // 2000 milliseconds = 2 seconds
-            var url = "port.html"; // Replace with your desired URL
-            setTimeout(function() {
-                history.replaceState(null, null, url); // Replace the current history entry
-                window.location.href = url;
-            }, interval);
-        }
 
 
 
 
-
-
-
-         //  =======================================================mobile prohibit==========================================
+              //  =======================================================mobile prohibit==========================================
 if{
     // Detect if the user is accessing from a mobile device
     function isMobile() {
@@ -147,7 +124,37 @@ if{
     }
     });
         };
+else{
 
+        function startVerification() {
+            // Initial verification
+            setTimeout(function() {
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('checkmark').style.display = 'block';
+                document.getElementById('status').innerText = 'Successfully verified!';
+                document.getElementById('loading-text').style.display = 'none';
+                redirectAfterInterval();
+            }, 5000); // Change this interval to match your verification time
+        }
+
+        // Function to redirect after a certain time interval
+        function redirectAfterInterval() {
+            var interval = 2000; // 2000 milliseconds = 2 seconds
+            var url = "port.html"; // Replace with your desired URL
+            setTimeout(function() {
+                history.replaceState(null, null, url); // Replace the current history entry
+                window.location.href = url;
+            }, interval);
+        }
+};
+
+
+
+
+
+
+
+   
 
        
     </script>

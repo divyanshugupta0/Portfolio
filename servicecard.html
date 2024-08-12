@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="customservice.png" type="image/x-icon">
+
+    <title>Fire Services</title>
+    <style>
+        /* Reset some basic styles */
+        body, h1, h2, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-color: crimson;
+            color: #fff;
+            position: relative;
+        }
+
+        header .back-btn {
+            position: absolute;
+            left: 20px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        header .back-btn:hover {
+            color: #ddd;
+        }
+
+        .back-icon {
+            margin-right: 5px;
+        }
+
+        .services-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .service-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+        }
+
+        .service-card h2 {
+            margin-bottom: 10px;
+            color: #282c34;
+        }
+
+        .service-card p {
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: crimson;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #555;
+        }
+
+        footer {
+            background-color: crimson;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button class="back-btn" onclick="history.back()">
+            <span class="back-icon">&#8592;</span> Back
+        </button>
+        <h1>Services</h1>
+    </header>
+
+    <section class="services-container">
+        <div class="service-card">
+            <img src="orbit.png" alt="Service 1 Logo" class="service-logo">
+            <h2>FireFly Orbit</h2>
+            <p>The Virtual Desktop</p>
+            <a href="https://divyanshugupta0.github.io/fireflyorbit" class="btn">Visit</a>
+        </div>
+
+        <div class="service-card">
+            <img src="hot-deal.png" alt="Service 2 Logo" class="service-logo">
+            <h2>FireFly Spark</h2>
+            <p>The Time Limiter System</p>
+            <a href="https://divyanshugupta0.github.io/fireflyspark" class="btn">Visit</a>
+        </div>
+
+        <div class="service-card">
+            <img src="programming.png" alt="Service 3 Logo" class="service-logo">
+            <h2>FireFly Compiler</h2>
+            <p>The Coding workspace for Coders</p>
+            <a href="https://divyanshugupta0.github.io/fireflycompiler" class="btn">Visit</a>
+        </div>
+
+        <div class="service-card">
+            <img src="notepad.png" alt="Service 4 Logo" class="service-logo">
+            <h2>FireNote</h2>
+            <p>The Online Notepad</p>
+            <a href="https://divyanshugupta0.github.io/firenote" class="btn">Visit</a>
+        </div>
+
+        <div class="service-card">
+            <img src="money.png" alt="Service 5 Logo" class="service-logo">
+            <h2>FireCalc</h2>
+            <p>The Online Calculator</p>
+            <a href="https://divyanshugupta0.github.io/FireCalc" class="btn">Visit</a>
+        </div>
+
+        <div class="service-card">
+            <img src="cd.png" alt="Service 6 Logo" class="service-logo">
+            <h2>FireFly Groove</h2>
+            <p>The Music player</p>
+            <a href="https://divyanshugupta0.github.io/fireflygroove" class="btn">Visit</a>
+        </div>
+
+        <!-- Add more service cards as needed -->
+    </section>
+    <footer>
+        <p>&copy; Copyright 2024 - FireFly. All rights reserved.</p>
+    </footer>
+</body>
+</html>

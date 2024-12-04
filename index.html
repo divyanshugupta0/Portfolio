@@ -3,196 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="auth.png" type="image/x-icon">
-    <title>Secure Verification</title>
+    <title>Fire Auth</title>
     <style>
-        :root {
-            --primary-color: #3498db;
-            --secondary-color: #2ecc71;
-            --bg-dark: #2c3e50;
-            --text-light: #ecf0f1;
-        }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
         body {
-            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
-            color: var(--text-light);
+            background-color: #e4e4f7;
+            color: #333;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            height: 100vh;
+            margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
+            text-align: center;
         }
         .container {
-            background: rgba(44, 62, 80, 0.9);
-            border-radius: 12px;
+            background-color: #fff;
             padding: 40px;
-            width: 100%;
-            max-width: 450px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border: 2px solid var(--primary-color);
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
-        h1 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            letter-spacing: 1px;
+        .container h1 {
+            color: #555;
         }
         .loader {
-            border: 4px solid rgba(255,255,255,0.2);
-            border-top: 4px solid var(--primary-color);
+            border: 8px solid #f3f3f3; /* Light grey */
+            border-top: 8px solid #606af8; /* Blue */
             border-radius: 50%;
             width: 60px;
             height: 60px;
-            animation: spin 1s linear infinite;
+            animation: spin 2s linear infinite;
             margin: 20px auto;
         }
-        #error-message {
-            color: #e74c3c;
+        .checkmark {
             display: none;
-            margin-top: 15px;
-            font-weight: bold;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            stroke-width: 2;
+            stroke: #606af8;
+            stroke-miterlimit: 10;
+            margin: 20px auto;
+            box-shadow: inset 0px 0px 0px #606af8;
+            animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both;
         }
-        .verification-details {
-            background: rgba(255,255,255,0.1);
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 20px;
-            text-align: left;
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #606af8;
+            fill: none;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.7s forwards;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        @keyframes stroke {
+            100% { stroke-dashoffset: 0; }
+        }
+        @keyframes scale {
+            0%, 100% { transform: none; }
+            50% { transform: scale3d(1.1, 1.1, 1); }
+        }
+        @keyframes fill {
+            100% { box-shadow: inherit 0px 0px 0px 30px #606af8; }
+        }
     </style>
 </head>
-<body>
+<body onload="startVerification()">
     <div class="container">
-        <h1 id="status">Secure Verification</h1>
-        <p id="loading-text">Verifying access credentials...</p>
+        <h1 id="status">Verifying you are human...</h1>
+        <p id="loading-text">This may take a few seconds...</p>
+        <!-- Loader -->
         <div class="loader" id="loader"></div>
-        <div id="error-message">Verification Failed</div>
-        <div class="verification-details" id="verification-details" style="display:none;">
-            <p>Verification Status: <span id="verify-status">Pending</span></p>
-            <p>Security Checks: <span id="security-checks">Initializing...</span></p>
+        <!-- Checkmark -->
+        <svg class="checkmark" id="checkmark" viewBox="0 0 52 52">
+            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"></circle>
+            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"></path>
+        </svg>
+        <!-- Insert Cloudflare verification code here -->
+        <div id="verification-widget">
+            <!-- Cloudflare Widget -->
         </div>
     </div>
-
     <script>
-        class AdvancedVerification {
-            constructor() {
-                this.checks = [];
-                this.initializeChecks();
-            }
-
-            initializeChecks() {
-                this.checks = [
-                    this.detectBrowserEnvironment(),
-                    this.checkNavigatorProperties(),
-                    this.validateUserInteraction()
-                ];
-            }
-
-            detectBrowserEnvironment() {
-                return new Promise((resolve) => {
-                    const isValidBrowser = 
-                        window.navigator && 
-                        window.navigator.userAgent && 
-                        !window.navigator.webdriver;
-                    resolve(isValidBrowser);
-                });
-            }
-
-            checkNavigatorProperties() {
-                return new Promise((resolve) => {
-                    const checks = [
-                        !!window.navigator.hardwareConcurrency,
-                        !!window.navigator.language,
-                        window.navigator.plugins && window.navigator.plugins.length > 0
-                    ];
-                    resolve(checks.filter(Boolean).length >= 2);
-                });
-            }
-
-            validateUserInteraction() {
-                return new Promise((resolve) => {
-                    let interactions = 0;
-                    const checkInteraction = () => interactions++;
-
-                    document.addEventListener('mousemove', checkInteraction);
-                    document.addEventListener('keydown', checkInteraction);
-
-                    setTimeout(() => {
-                        document.removeEventListener('mousemove', checkInteraction);
-                        document.removeEventListener('keydown', checkInteraction);
-                        resolve(interactions > 3);
-                    }, 3000);
-                });
-            }
-
-            async performVerification() {
-                try {
-                    const results = await Promise.all(this.checks);
-                    return results.every(result => result === true);
-                } catch (error) {
-                    console.error('Verification error:', error);
-                    return false;
-                }
-            }
-        }
-
-        async function startVerification() {
-            const verifier = new AdvancedVerification();
-            
-            try {
-                // Show verification details
-                document.getElementById('verification-details').style.display = 'block';
-                
-                // Perform verification
-                const isVerified = await verifier.performVerification();
-                
-                if (isVerified) {
-                    document.getElementById('verify-status').textContent = 'Verified';
-                    document.getElementById('security-checks').textContent = 'All checks passed';
-                    
-                    setTimeout(() => {
-                        // Successful verification redirect
-                        window.location.href = "port"; // Replace with target URL
-                    }, 2000);
-                } else {
-                    throw new Error('Verification failed');
-                }
-            } catch (error) {
-                // Verification failed
+        function startVerification() {
+            // Initial verification
+            setTimeout(function() {
                 document.getElementById('loader').style.display = 'none';
-                document.getElementById('error-message').style.display = 'block';
-                document.getElementById('status').textContent = 'Access Denied';
-                document.getElementById('verify-status').textContent = 'Failed';
-                document.getElementById('security-checks').textContent = 'Security checks not passed';
-            }
+                document.getElementById('checkmark').style.display = 'block';
+                document.getElementById('status').innerText = 'Successfully verified!';
+                document.getElementById('loading-text').style.display = 'none';
+                redirectAfterInterval();
+            }, 5000); // Change this interval to match your verification time
         }
 
-        // Prevent direct access
-        function preventDirectAccess() {
-            if (!document.referrer) {
-                document.getElementById('error-message').style.display = 'block';
-                document.getElementById('loader').style.display = 'none';
-                return false;
-            }
-            return true;
+        // Function to redirect after a certain time interval
+        function redirectAfterInterval() {
+            var interval = 2000; // 2000 milliseconds = 2 seconds
+            var url = "#"; // Replace with your desired URL
+            setTimeout(function() {
+                history.replaceState(null, null, url); // Replace the current history entry
+                window.location.href = url;
+            }, interval);
         }
 
-        // Initialize on page load
-        window.onload = () => {
-            if (preventDirectAccess()) {
-                startVerification();
-            }
-        };
+
+        
     </script>
 </body>
 </html>

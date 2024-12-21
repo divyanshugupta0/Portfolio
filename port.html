@@ -21,6 +21,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
 
+        <!-- Swiper CSS -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
 </head>
 <body oncontextmenu="return false;">
     <nav class="navbar">
@@ -31,6 +37,8 @@
                 <li><a href="#about" class="menu-btn">About</a></li>
                 <li><a href="#services" class="menu-btn">Services</a></li>
                 <li><a href="#skills" class="menu-btn">Skills</a></li>
+                <li><a href="#certificates" class="menu-btn">Certificates</a></li>
+                <li><a href="#my-projects" class="menu-btn">Projects</a></li>
                 <li><a href="#teams" class="menu-btn">Teams</a></li>
                 <li><a href="#contact" class="menu-btn">Contact</a></li>
                 <a href="servicecard.html"><button class="btnLogin-popup"#162938>Services</button></a>
@@ -173,6 +181,109 @@ As a freelancer, I thrive on the dynamic nature of my work. Each project present
             </div>
         </div>
     </section>
+
+
+    <section id="certificates" class="certificates">
+        <div class="max-width">
+            <h2 class="title">My Certificates</h2>
+            <!-- Swiper Container -->
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <!-- Slide 1 -->
+                    <div class="swiper-slide">
+                        <img src="certificateaws.png" alt="Amazon Webservices">
+                        <p>Amazon Webservices</p>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="swiper-slide">
+                        <img src="certificategoogle.png" alt="Google Developer Student Clubs">
+                        <p>Google Developer Student Clubs</p>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="swiper-slide">
+                        <img src="certificateNPTEL.png" alt="IIT Kharagpur NPTEL Swayam">
+                        <p>IIT Kharagpur NPTEL Swayam</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="ceritificatedevtown.png" alt="DevTown BootCamp">
+                        <p>DevTown BootCamp</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="certificateSQLHack.png" alt="HackerRank SQL Database(Basic)">
+                        <p>HackerRank SQL Database(Basic)</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="certificateCSS.png" alt="HackerRank CSS(Basic)">
+                        <p>HackerRank CSS(Basic)</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="certificateHTML.png" alt="ProProfs HTML(Basic)">
+                        <p>ProProfs HTML(Basic)</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="certificateGLAcodechef.jpg" alt="GLA University CodeChef">
+                        <p>GLA University CodeChef</p>
+                    </div>
+                    <!-- Add more slides as needed -->
+                </div>
+                <!-- Add navigation buttons -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <!-- Add pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- My Projects Section -->
+<section id="my-projects" class="my-projects">
+    <div class="max-width">
+        <h2 class="title">My Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <img src="fireflyspark.jpg" alt="FireFly Spark">
+                <h3>FireFly Spark</h3>
+                <a href="https://fireflyspark.netlify.app" target="_blank">View Project</a>
+            </div>
+            <div class="project-card">
+                <img src="fireflycompiler.jpeg" alt="FireFly Compiler">
+                <h3>FireFly Compiler</h3>
+                <a href="https://divyanshugupta0.github.io/fireflycompiler" target="_blank">View Project</a>
+            </div>
+            <div class="project-card">
+                <img src="firenote.jpeg" alt="FireFly Note">
+                <h3>FireFly Note</h3>
+                <a href="https://divyanshugupta0.github.io/firenote" target="_blank">View Project</a>
+            </div>
+            <div class="project-card">
+                <img src="fireflyforms.jpeg" alt="FireFly Forms">
+                <h3>FireFly Forms</h3>
+                <a href="https://divyanshugupta0.github.io/fireflyforms" target="_blank">View Project</a>
+            </div>
+            <div class="project-card">
+                <img src="fireflyorbit.jpeg" alt="FireFly Orbit">
+                <h3>FireFly Orbit</h3>
+                <a href="https://divyanshugupta0.github.io/fireflyorbit" target="_blank">View Project</a>
+            </div>
+            <div class="project-card">
+                <img src="fireflychat.jpeg" alt="FireFly Anonymous Chat">
+                <h3>FireFly Anonymous Chat</h3>
+                <a href="https://divyanshugupta0.github.io/firechat" target="_blank">View Project</a>
+            </div>
+            <div class="project-card">
+                <img src="fireflygroove.jpeg" alt="FireFly Groove">
+                <h3>FireFly Groove</h3>
+                <a href="https://divyanshugupta0.github.io/fireflygroove" target="_blank">View Project</a>
+            </div>
+            <div class="project-card">
+                <img src="firep2p.jpeg" alt="FireFly Share Wing">
+                <h3>FireFly Share Wing</h3>
+                <a href="https://divyanshugupta0.github.io/firep2p" target="_blank">View Project</a>
+            </div>
+            <!-- Add more project cards as needed -->
+        </div>
+    </div>
+</section>
 
     <!-- teams section start -->
     <section class="teams" id="teams">
@@ -346,6 +457,7 @@ As a freelancer, I thrive on the dynamic nature of my work. Each project present
         <span>Created By <a href="https://www.instagram.com/divyanshu_gupta028/">Divyanshu Gupta</a> | <span class="far fa-copyright"></span> 2024 All rights reserved.</span>
     </footer>
  <script src="script.js"></script>
+    <script src="sweeper.js"></script>
     <script src="chatbot.js"></script>
 
 </html>

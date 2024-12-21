@@ -6,6 +6,7 @@
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
+    --swiper-theme-color: crimson;
 }
 html{
     scroll-behavior: smooth;

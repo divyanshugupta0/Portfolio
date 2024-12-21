@@ -422,6 +422,9 @@ section .title::after{
 .skills-content .right .Tkinter::before{
     width: 40%;
 }
+.skills-content .right .Java::before{
+    width: 70%;
+}
 /*=================================certificates============================*/
 /*========================cerificates section=================*/
 .certificates .title::after{

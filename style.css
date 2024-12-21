@@ -422,6 +422,202 @@ section .title::after{
 .skills-content .right .Tkinter::before{
     width: 40%;
 }
+/*=================================certificates============================*/
+/*========================cerificates section=================*/
+.certificates .title::after{
+    content: "what i have";
+    background-color: #222;
+}
+.certificates .title::before{
+    content: "";
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    width: 180px;
+    height: 3px;
+    background: whitesmoke;
+    transform: translateX(-50%);
+}
+.certificates{
+    background-color: #222;
+    color: whitesmoke;
+}
+/* General Swiper Styles */
+.swiper-container {
+    width: 100%;
+    height: 350px; /* Default height for larger screens */
+    overflow: hidden; /* Prevent overflow outside the container */
+    position: relative;
+}
+
+.swiper-wrapper {
+    width: 100%;
+}
+
+.swiper-slide {
+    flex-shrink: 0;
+    width: calc(100% - 20px); /* Prevent slides from extending beyond viewport */
+    height: 100%;
+    opacity: 1;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    margin: 0 auto; /* Center the slide */
+}
+
+.swiper-slide.dimmed {
+    opacity: 0.5; /* Dimmed effect for side slides */
+    transform: scale(0.9); /* Slightly shrink side slides */
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Maintain aspect ratio */
+    border-radius: 5px;
+}
+
+/* Navigation Buttons (Hidden Globally) */
+.swiper-button-next,
+.swiper-button-prev {
+    display: none; /* Hide navigation buttons on all displays */
+    background-color: transparent;
+    border-radius: 70%;
+    color: #111;
+}
+
+/* Pagination */
+.swiper-pagination {
+    bottom: 100px;
+}
+
+.owl-dots{
+    text-align: center;
+    margin-top: 20px;
+}
+.owl-dot{
+    height: 13px;
+    width: 13px;
+    margin: 0 5px;
+    outline: none!important;
+    border-radius: 50%;
+    border: 2px solid crimson!important;
+    transition: all 0.3s ease;
+}
+.owl-dot.active{
+    width: 35px;
+    border-radius: 14px;
+}
+.owl-dot.active,
+.owl-dot:hover{
+    background: crimson!important;
+}
+
+/* Media Query for Mobile Screens */
+@media (max-width: 768px) {
+    .swiper-container {
+        height: 400px; /* Adjust height for better visibility on mobile */
+    }
+
+    .swiper-slide {
+        width: calc(100% - 30px); /* Ensure slides stay within the viewport */
+    }
+
+    .swiper-slide img {
+        width: 95%; /* Certificates fit closer to edges */
+        height: auto; /* Maintain aspect ratio */
+        margin: 0 auto; /* Center certificates horizontally */
+    }
+}
+
+/* Media Query for Extra Small Screens */
+@media (max-width: 480px) {
+    .swiper-container {
+        height: 450px; /* Further adjust height for smaller screens */
+    }
+
+    .swiper-slide {
+        width: calc(100% - 40px); /* Additional margin for tiny screens */
+        transform: none; /* No scaling effect for slides */
+    }
+
+    .swiper-slide img {
+        width: 100%; /* Certificates take full width of the container */
+        border-radius: 2px; /* Minimal border radius */
+    }
+}
+
+
+/*============================================projects=======================================*/
+.my-projects .title::after{
+    content: "what i done" !important;
+    background-color: #E3F2FD;
+}
+
+.my-projects .title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.project-card {
+    background: #fff6f6;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.project-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.project-card h3 {
+    margin: 15px 0;
+    text-align: center;
+    color: #444;
+    font-size: 1.25rem;
+}
+
+.project-card a {
+    display: block;
+    margin: 10px auto 20px;
+    width: 80%;
+    padding: 10px 15px;
+    text-align: center;
+    color: #fff;
+    background-color: crimson;
+    border-radius: 25px;
+    text-decoration: none;
+    border: 2px solid crimson;
+    transition: background-color 0.3s;
+}
+
+.project-card a:hover {
+    background-color: transparent;
+    border-radius: 25px;
+    font-weight: 500;
+    border: 2px solid crimson;
+    color: crimson;
+}
+
+
+
+
 /* teams section styling */
 .teams .title::after{
     content: "who with me";
@@ -1032,7 +1228,7 @@ header h2 {
   .chatbot {
     right: 0;
     bottom: 0;
-    height: 92%;
+    height: 90%;
     border-radius: 0;
     width: 100%;
   }

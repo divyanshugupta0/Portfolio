@@ -75,9 +75,44 @@ $(document).ready(function(){
     });
     
 });
-
-
-
+//contact form codes
+document.getElementById('contactForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(e.target);
+    
+    // Get the submit button and store original text
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    
+    // Show loading state
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+    submitBtn.disabled = true;
+    
+    try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: formData
+        });
+        
+        // Restore button state
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        
+        if(response.ok) {
+            showSuccessNotification("Message sent successfully!");
+            e.target.reset();
+        } else {
+            showErrorNotification("Failed to send message. Please try again.");
+        }
+    } catch(err) {
+        // Restore button state
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        
+        showErrorNotification("An error occurred. Please try again later.");
+    }
+});
 
   /*----------------------============================CHATBOT================================-------------------------------*/
 

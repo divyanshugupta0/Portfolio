@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $(window).scroll(function(){
-        // sticky navbar on scroll
+        // sticky navbar on scroll script
         if(this.scrollY > 20){
             $('.navbar').addClass("sticky");
         }else{
@@ -100,19 +100,47 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
         submitBtn.disabled = false;
         
         if(response.ok) {
-            showSuccessNotification("Message sent successfully!");
+            notifications.show({
+                title: 'Success ',
+                message: 'Message sent successfully!',
+                character: 'disneyicon.png'
+              });
+
+
             e.target.reset();
         } else {
-            showErrorNotification("Failed to send message. Please try again.");
+            notifications.show({
+                title: 'Error ',
+                message: 'An Error Occured! while sending message please try again later',
+                character: 'disneyicon.png'
+              });
         }
     } catch(err) {
         // Restore button state
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
         
-        showErrorNotification("An error occurred. Please try again later.");
+        notifications.show({
+            title: 'Error ',
+            message: 'An Error Occured! while sending message please try again later',
+            character: 'disneyicon.png'
+          });
     }
 });
+window.onload = function() {
+    notifications.showAnimated({
+        message: 'Welcome to my portfolio website!',
+        character: 'disneyicon.png'
+    });
+
+    setTimeout(() => {
+        notifications.showAnimated({
+            message: 'Notice: 🎉🎉Arcade Section is Coming Soon......',
+            character: 'hurraydisney.png'
+        });
+    }, 4000); // Show second notification after 4 seconds
+}
+
 
   /*----------------------============================CHATBOT================================-------------------------------*/
 
@@ -123,7 +151,7 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
 
 
 
-const chatbotToggler = document.querySelector(".chatbot-toggler");
+  const chatbotToggler = document.querySelector(".chatbot-toggler");
   const closeBtn = document.querySelector(".close-btn");
   const chatbox = document.querySelector(".chatbox");
   const chatInput = document.querySelector(".chat-input textarea");

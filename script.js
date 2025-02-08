@@ -123,9 +123,7 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
 
 
 
-
-
- const chatbotToggler = document.querySelector(".chatbot-toggler");
+const chatbotToggler = document.querySelector(".chatbot-toggler");
   const closeBtn = document.querySelector(".close-btn");
   const chatbox = document.querySelector(".chatbox");
   const chatInput = document.querySelector(".chat-input textarea");
@@ -135,7 +133,7 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
   const inputInitHeight = chatInput.scrollHeight;
   
   // Token system setup
-  const MAX_TOKENS = 4;
+  const MAX_TOKENS = 5;
   const TOKEN_RESET_HOURS = 24;
   
   const getTokenData = () => {
@@ -177,32 +175,62 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
   const generateResponse = async (chatElement) => {
       const messageElement = chatElement.querySelector("p");
   
-      const data = {
-          query: userMessage,
-          sysMsg: 'You are a friendly chatbot assistant for a portfolio website. Only provide information about the website, its services, skills section, and contact information. Do not discuss topics outside of what is shown on the website.'
-      };
+      const data = JSON.stringify({
+          messages: [
+              {
+                  role: 'user',
+                  content: userMessage
+              }
+          ],
+          model: 'gpt-4o',
+          max_tokens: 100,
+          temperature: 0.9
+      });
   
       try {
-          const response = await fetch('https://infinite-gpt.p.rapidapi.com/infinite-gpt', {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+
+          const response = await fetch('https://cheapest-gpt-4-turbo-gpt-4-vision-chatgpt-openai-ai-api.p.rapidapi.com/v1/chat/completions', {
               method: 'POST',
               headers: {
                   'x-rapidapi-key': '1dcaa5af51mshcd138483c5307c4p185bbdjsn88c7f008dffe',
-                  'x-rapidapi-host': 'infinite-gpt.p.rapidapi.com',
+                  'x-rapidapi-host': 'cheapest-gpt-4-turbo-gpt-4-vision-chatgpt-openai-ai-api.p.rapidapi.com',
                   'Content-Type': 'application/json'
               },
-              body: JSON.stringify(data)
+              body: data,
+              signal: controller.signal
           });
           
+          clearTimeout(timeoutId);
+
+          if (!response.ok) {
+              throw new Error('API request failed');
+          }
+          
           const result = await response.json();
-          messageElement.textContent = result.message;
+          
+          if (!result.choices || !result.choices[0] || !result.choices[0].message) {
+              throw new Error('Invalid response format');
+          }
+          
+          messageElement.textContent = result.choices[0].message.content;
+          
       } catch (err) {
+          console.error('Chat error:', err);
           messageElement.classList.add("error");
-          messageElement.textContent = "SORRY! We are not available right now. Please try again.";
+          if (err.name === 'AbortError') {
+              messageElement.textContent = "Request timed out. Please try again later.";
+          } else if (err.message.includes("timeout")) {
+              messageElement.textContent = "The API is experiencing high traffic. Please try again in a few moments.";
+          } else {
+              messageElement.textContent = "SORRY! We are not available right now. Please try again later.";
+          }
       }
       chatbox.scrollTo(0, chatbox.scrollHeight);
   }
   
-  const handleChat = () => {
+  const handleChat = async () => {
       userMessage = chatInput.value.trim();
       if(!userMessage) return;
       
@@ -222,12 +250,11 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
       chatbox.appendChild(createChatLi(`Messages remaining today: ${tokenData.tokens - 1}`, "incoming"));
       chatbox.scrollTo(0, chatbox.scrollHeight);
       
-      setTimeout(() => {
-          const incomingChatLi = createChatLi("Thinking...", "incoming");
-          chatbox.appendChild(incomingChatLi);
-          chatbox.scrollTo(0, chatbox.scrollHeight);
-          generateResponse(incomingChatLi);
-      }, 300);
+      const incomingChatLi = createChatLi("Thinking...", "incoming");
+      chatbox.appendChild(incomingChatLi);
+      chatbox.scrollTo(0, chatbox.scrollHeight);
+      
+      await generateResponse(incomingChatLi);
   }
   
   chatInput.addEventListener("input", () => {
@@ -252,3 +279,6 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
           chatbox.scrollTo(0, chatbox.scrollHeight);
       }
   });
+
+
+

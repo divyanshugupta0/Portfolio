@@ -1,0 +1,129 @@
+:root {
+    --success-color: rgb(34, 197, 94);
+    --error-color: rgb(239, 68, 68);
+    --info-color: rgb(59, 130, 246);
+  }
+
+  .notification-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .notification {
+    padding: 12px 40px 12px 16px;
+    border-radius: 12px;
+    position: relative;
+    animation: slideDown 0.3s ease-out;
+    min-width: 300px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 
+      0 4px 6px rgba(0, 0, 0, 0.1),
+      0 0 1px rgba(255, 255, 255, 0.1) inset;
+    display: flex;
+    align-items: center;
+  }
+
+  .notification.success {
+    background: linear-gradient(
+      135deg, 
+      rgba(35, 234, 108, 0.336), 
+      rgba(34, 197, 94, 0.1)
+    );
+    border: 1px solid rgba(34, 197, 94, 0.2);
+  }
+
+  .notification.error {
+    background: linear-gradient(
+      135deg, 
+      rgba(239, 68, 68, 0.447), 
+      rgba(239, 68, 68, 0.1)
+    );
+    border: 1px solid rgba(239, 68, 68, 0.2);
+  }
+
+  .notification.info {
+    background: linear-gradient(
+      135deg, 
+      rgba(59, 131, 246, 0.401), 
+      rgba(59, 130, 246, 0.1)
+    );
+    border: 1px solid rgba(59, 130, 246, 0.2);
+  }
+
+  .notification-icon {
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .notification-content {
+    flex-grow: 1;
+  }
+
+  .notification-title {
+    font-weight: 500;
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .notification-message {
+    margin: 2px 0 0 0;
+    font-size: 13px;
+    opacity: 0.9;
+  }
+
+  .notification-close {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    opacity: 0.7;
+    transition: all 0.2s ease;
+  }
+
+  .notification-close:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+  }
+
+  .slide-up {
+    animation: slideUp 0.s ease-out forwards;
+  }

@@ -125,83 +125,117 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
 
 
 
-
-  const chatbotToggler = document.querySelector(".chatbot-toggler");
+ const chatbotToggler = document.querySelector(".chatbot-toggler");
   const closeBtn = document.querySelector(".close-btn");
   const chatbox = document.querySelector(".chatbox");
   const chatInput = document.querySelector(".chat-input textarea");
   const sendChatBtn = document.querySelector(".chat-input span");
   
-  let userMessage = null; // Variable to store user's message
-  const API_KEY = "sk-proj-0FmgY9oZPciOfYaUBotqT3BlbkFJmmKkIJ0s4a8oiYzRkckV"; // Paste your API key here
+  let userMessage = null;
   const inputInitHeight = chatInput.scrollHeight;
   
+  // Token system setup
+  const MAX_TOKENS = 4;
+  const TOKEN_RESET_HOURS = 24;
+  
+  const getTokenData = () => {
+      const data = localStorage.getItem('chatTokens');
+      if (!data) return { tokens: MAX_TOKENS, lastReset: Date.now() };
+      return JSON.parse(data);
+  };
+  
+  const updateTokens = () => {
+      let data = getTokenData();
+      const now = Date.now();
+      const hoursSinceReset = (now - data.lastReset) / (1000 * 60 * 60);
+      
+      if (hoursSinceReset >= TOKEN_RESET_HOURS) {
+          data = { tokens: MAX_TOKENS, lastReset: now };
+      }
+      
+      return data;
+  };
+  
+  const useToken = () => {
+      const data = updateTokens();
+      if (data.tokens <= 0) return false;
+      
+      data.tokens--;
+      localStorage.setItem('chatTokens', JSON.stringify(data));
+      return true;
+  };
+  
   const createChatLi = (message, className) => {
-      // Create a chat <li> element with passed message and className
       const chatLi = document.createElement("li");
       chatLi.classList.add("chat", `${className}`);
       let chatContent = className === "outgoing" ? `<p></p>` : `<span class="material-symbols-outlined">smart_toy</span><p></p>`;
       chatLi.innerHTML = chatContent;
       chatLi.querySelector("p").textContent = message;
-      return chatLi; // return chat <li> element
+      return chatLi;
   }
   
-  const generateResponse = (chatElement) => {
-      const API_URL = "https://api.openai.com/v1/chat/completions";
+  const generateResponse = async (chatElement) => {
       const messageElement = chatElement.querySelector("p");
   
-      // Define the properties and message for the API request
-      const requestOptions = {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${API_KEY}`
-          },
-          body: JSON.stringify({
-              model: "gpt-3.5-turbo",
-              messages: [{role: "user", content: userMessage}],
-          })
-      }
+      const data = {
+          query: userMessage,
+          sysMsg: 'You are a friendly chatbot assistant for a portfolio website. Only provide information about the website, its services, skills section, and contact information. Do not discuss topics outside of what is shown on the website.'
+      };
   
-      // Send POST request to API, get response and set the reponse as paragraph text
-      fetch(API_URL, requestOptions).then(res => res.json()).then(data => {
-          messageElement.textContent = data.choices[0].message.content.trim();
-      }).catch(() => {
+      try {
+          const response = await fetch('https://infinite-gpt.p.rapidapi.com/infinite-gpt', {
+              method: 'POST',
+              headers: {
+                  'x-rapidapi-key': '1dcaa5af51mshcd138483c5307c4p185bbdjsn88c7f008dffe',
+                  'x-rapidapi-host': 'infinite-gpt.p.rapidapi.com',
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+          });
+          
+          const result = await response.json();
+          messageElement.textContent = result.message;
+      } catch (err) {
           messageElement.classList.add("error");
-          messageElement.textContent = "SORRY!,We are not available right now. Please try again.";
-      }).finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
+          messageElement.textContent = "SORRY! We are not available right now. Please try again.";
+      }
+      chatbox.scrollTo(0, chatbox.scrollHeight);
   }
   
   const handleChat = () => {
-      userMessage = chatInput.value.trim(); // Get user entered message and remove extra whitespace
+      userMessage = chatInput.value.trim();
       if(!userMessage) return;
+      
+      const tokenData = updateTokens();
+      if (tokenData.tokens <= 0) {
+          chatbox.appendChild(createChatLi("You've reached your daily message limit. Please try again in 24 hours.", "incoming"));
+          chatbox.scrollTo(0, chatbox.scrollHeight);
+          return;
+      }
+      
+      if (!useToken()) return;
   
-      // Clear the input textarea and set its height to default
       chatInput.value = "";
       chatInput.style.height = `${inputInitHeight}px`;
   
-      // Append the user's message to the chatbox
       chatbox.appendChild(createChatLi(userMessage, "outgoing"));
+      chatbox.appendChild(createChatLi(`Messages remaining today: ${tokenData.tokens - 1}`, "incoming"));
       chatbox.scrollTo(0, chatbox.scrollHeight);
       
       setTimeout(() => {
-          // Display "Thinking..." message while waiting for the response
           const incomingChatLi = createChatLi("Thinking...", "incoming");
           chatbox.appendChild(incomingChatLi);
           chatbox.scrollTo(0, chatbox.scrollHeight);
           generateResponse(incomingChatLi);
-      }, 600);
+      }, 300);
   }
   
   chatInput.addEventListener("input", () => {
-      // Adjust the height of the input textarea based on its content
       chatInput.style.height = `${inputInitHeight}px`;
       chatInput.style.height = `${chatInput.scrollHeight}px`;
   });
   
   chatInput.addEventListener("keydown", (e) => {
-      // If Enter key is pressed without Shift key and the window 
-      // width is greater than 800px, handle the chat
       if(e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
           e.preventDefault();
           handleChat();
@@ -210,9 +244,11 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
   
   sendChatBtn.addEventListener("click", handleChat);
   closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
-  chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
-
-
-
-
-
+  chatbotToggler.addEventListener("click", () => {
+      document.body.classList.toggle("show-chatbot");
+      const tokenData = updateTokens();
+      if (tokenData.tokens > 0) {
+          chatbox.appendChild(createChatLi(`You have ${tokenData.tokens} messages remaining today.`, "incoming"));
+          chatbox.scrollTo(0, chatbox.scrollHeight);
+      }
+  });

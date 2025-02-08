@@ -1,129 +1,220 @@
-:root {
-    --success-color: rgb(34, 197, 94);
-    --error-color: rgb(239, 68, 68);
-    --info-color: rgb(59, 130, 246);
-  }
+.notification-container {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: none;
+  color: white;
+  background: transparent;
+  padding: 20px;
+  border-radius: 16px;
+  max-width: 520px;
+  width: 100%;
+}
 
-  .notification-container {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+.notification {
+  padding: 16px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 480px;
+  background: linear-gradient(to right, rgba(180, 5, 5, 0.8),rgba(239, 24, 24, 0.1), rgba(255, 14, 14, 0.038));
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  pointer-events: auto;
+  animation: slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+  color: white;
+  margin: 0 auto;
+}
 
-  .notification {
-    padding: 12px 40px 12px 16px;
-    border-radius: 12px;
-    position: relative;
-    animation: slideDown 0.3s ease-out;
-    min-width: 300px;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 
-      0 4px 6px rgba(0, 0, 0, 0.1),
-      0 0 1px rgba(255, 255, 255, 0.1) inset;
-    display: flex;
-    align-items: center;
-  }
+/* New animated notification style */
+.notification.animated {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: none;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  width: 100%;
+  height: 100vh;
+  max-width: 100vw;
+  padding: 0;
+  z-index: 9999;
+}
 
-  .notification.success {
-    background: linear-gradient(
-      135deg, 
-      rgba(35, 234, 108, 0.336), 
-      rgba(34, 197, 94, 0.1)
-    );
-    border: 1px solid rgba(34, 197, 94, 0.2);
-  }
+.character-slide {
+  position: relative;
+  width: 200px;
+  height: 380px;
+  animation: slideFromLeft 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
 
-  .notification.error {
-    background: linear-gradient(
-      135deg, 
-      rgba(239, 68, 68, 0.447), 
-      rgba(239, 68, 68, 0.1)
-    );
-    border: 1px solid rgba(239, 68, 68, 0.2);
-  }
+.message-bubble {
+  background: rgba(0, 0, 0, 0.447);
+  padding: 30px;
+  border-radius: 30px;
+  margin-left: 30px;
+  max-width: 600px;
+  animation: slideFromRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+  opacity: 0;
+  border: 1px solid rgba(255, 255, 255, 0.955);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  color: white;
+}
 
-  .notification.info {
-    background: linear-gradient(
-      135deg, 
-      rgba(59, 131, 246, 0.401), 
-      rgba(59, 130, 246, 0.1)
-    );
-    border: 1px solid rgba(59, 130, 246, 0.2);
+@keyframes slideFromLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
   }
-
-  .notification-icon {
-    margin-right: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .notification-content {
-    flex-grow: 1;
-  }
-
-  .notification-title {
-    font-weight: 500;
-    margin: 0;
-    font-size: 14px;
-  }
-
-  .notification-message {
-    margin: 2px 0 0 0;
-    font-size: 13px;
-    opacity: 0.9;
-  }
-
-  .notification-close {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-    opacity: 0.7;
-    transition: all 0.2s ease;
-  }
-
-  .notification-close:hover {
+  to {
+    transform: translateX(0);
     opacity: 1;
-    background: rgba(255, 255, 255, 0.1);
   }
+}
 
-  @keyframes slideDown {
-    from {
-      transform: translateY(-100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
+@keyframes slideFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
   }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 
-  @keyframes slideUp {
-    from {
-      transform: translateY(0);
-      opacity: 1;
-    }
-    to {
-      transform: translateY(-100%);
-      opacity: 0;
-    }
+@keyframes slideAway {
+  to {
+    transform: translateX(-200%);
+    opacity: 0;
   }
+}
 
-  .slide-up {
-    animation: slideUp 0.s ease-out forwards;
+.slide-away {
+  animation: slideAway 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.character-avatar {
+  width: 120px;
+  height: 240px;
+  position: absolute;
+  bottom: -120px;
+  left: 16px;
+  animation: riseUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  flex-shrink: 0;
+  background: transparent;
+}
+
+@keyframes riseUp {
+  to {
+    bottom: -120px;
   }
+}
+
+.character-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.notification-content {
+  flex-grow: 1;
+  padding-right: 16px;
+  margin-left: 140px;
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.notification-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  line-height: 1.4;
+}
+
+.notification-date {
+  font-size: 12px;
+  color: var(--text-secondary, rgba(255, 255, 255, 0.6));
+}
+
+.notification-message {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  line-height: 1.9;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Demo buttons styling */
+.demo-buttons {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 12px;
+}
+
+.demo-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.demo-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}

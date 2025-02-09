@@ -8,7 +8,7 @@ const skills = [
             const outerCircle = document.querySelector('.outer-circle');
         
             const skillIcons = {
-                'github': 'github-sign.png',
+                'github': 'githubwh.png',
                 'git': 'git.png',
                 'html': 'html.png',
                 'css': 'css-3.png',

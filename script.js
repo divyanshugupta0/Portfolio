@@ -1,3 +1,15 @@
+// Check for token in URL params
+const urlParams = new URLSearchParams(window.location.search);
+const token = urlParams.get('token');
+
+// If no token present, redirect back
+if (!token) {
+  window.location.href = 'index'; // Replace with your redirect URL
+} else {
+  // Store token in sessionStorage
+  sessionStorage.setItem('token', token);
+}
+
 $(document).ready(function(){
     $(window).scroll(function(){
         // sticky navbar on scroll script
@@ -128,18 +140,112 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
     }
 });
 window.onload = function() {
-    notifications.showAnimated({
-        message: 'Welcome to my portfolio website!',
-        character: 'disneyicon.png'
-    });
 
-    setTimeout(() => {
-        notifications.showAnimated({
-            message: 'Notice: 🎉🎉Arcade Section is Coming Soon......',
-            character: 'hurraydisney.png'
-        });
-    }, 4000); // Show second notification after 4 seconds
+    // Check if this is user's first visit or has valid token
+    if (!localStorage.getItem('hasVisited') || sessionStorage.getItem('token')) {
+        localStorage.setItem('hasVisited', 'true');
+        
+        setTimeout(() => {
+            notifications.showAnimated({
+                message: 'Welcome to <span style="color: red;">My Portfolio!</span>', 
+                character: 'disneyicon.png'
+            });
+
+        }, 1000);
+
+        setTimeout(() => {
+            notifications.showAnimated({
+                message: '<span style="color: red;">Notice:</span> 🎉🎉Arcade Section is Coming Soon......',
+                character: 'hurraydisney.png'
+            });
+        }, 5000);
+    } else {
+        setTimeout(() => {
+            notifications.showAnimated({
+                message: '<span style="color: red;">Notice:</span> 🎉🎉Arcade Section is Coming Soon......',
+                character: 'hurraydisney.png'
+            });
+        }, 2000);
+    }
 }
+
+
+
+// Intersection Observer for lazy loading sections
+const sections = document.querySelectorAll('section');
+
+const sectionObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const section = entry.target;
+            
+            // Check if section is already loaded
+            if (!section.classList.contains('loaded')) {
+                // Add loaded class to prevent reloading
+                section.classList.add('loaded');
+                
+                // Show loading animation
+                section.style.opacity = '0';
+                section.style.transition = 'opacity 0.5s ease-in';
+                
+                // Simulate content loading with slight delay
+                setTimeout(() => {
+                    // Remove any placeholder content
+                    section.style.opacity = '1'
+                }, 300);
+            }
+        }
+    });
+}, {
+    // Options
+    threshold: 0.1, // Trigger when 10% of section is visible
+    rootMargin: '50px' // Start loading slightly before section comes into view
+});
+
+// Observe all sections
+sections.forEach(section => {
+    sectionObserver.observe(section);
+    
+    // Add placeholder state
+    if (!section.classList.contains('loaded')) {
+        section.style.opacity = '0';
+    }
+});
+
+
+/*=======================================download resumeee=============================*/
+  document.getElementById('download-btn').addEventListener('click', async function(e) {
+    e.preventDefault();
+    try {
+      const response = await fetch('Divyanshu\'s Resumee.pdf');
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Divyanshu\'s Resumee.pdf'; // Add download attribute
+        document.body.appendChild(a);
+
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+
+        notifications.show({
+          title: 'Success',
+          message: 'Resume downloaded successfully!',
+          character: 'hurraydisney.png'
+        });
+      } else {
+        throw new Error('Download failed');
+      }
+    } catch (err) {
+      notifications.show({
+        title: 'Error',
+        message: 'Error downloading resume. Please try again later.',
+        character: 'sorrydisney.png'
+      });
+    }
+  });
 
 
   /*----------------------============================CHATBOT================================-------------------------------*/
@@ -250,7 +356,7 @@ window.onload = function() {
           if (err.name === 'AbortError') {
               messageElement.textContent = "Request timed out. Please try again later.";
           } else if (err.message.includes("timeout")) {
-              messageElement.textContent = "The API is experiencing high traffic. Please try again in a few moments.";
+              messageElement.textContent = "The Bot is experiencing high traffic. Please try again in a few moments.";
           } else {
               messageElement.textContent = "SORRY! We are not available right now. Please try again later.";
           }
@@ -265,8 +371,14 @@ window.onload = function() {
       const tokenData = updateTokens();
       if (tokenData.tokens <= 0) {
           chatbox.appendChild(createChatLi("You've reached your daily message limit. Please try again in 24 hours.", "incoming"));
+          notifications.show({
+            title: 'Error ',
+            message: 'You have reached your daily message limit. Please try again in 24 hours.',
+            character: 'sorrydisney.png'
+          });
           chatbox.scrollTo(0, chatbox.scrollHeight);
           return;
+
       }
       
       if (!useToken()) return;

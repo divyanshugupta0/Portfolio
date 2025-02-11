@@ -530,7 +530,97 @@ As a freelancer, I thrive on the dynamic nature of my work. Each project present
         a.appendChild(r);
     })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
 </script>
+<div id="preloader">
+    <div class="loader">
+        <div class="loading-icons">
+            <i class="fas fa-code"></i>
+            <i class="fas fa-terminal"></i>
+            <i class="fas fa-laptop-code"></i>
+        </div>
+        <div class="loading-text">Loading...</div>
+    </div>
+</div>
 
+<style>
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:transparent;
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    position: relative;
+    width: 200px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.loading-icons {
+    display: flex;
+    gap: 15px;
+    font-size: 24px;
+}
+
+.loading-icons i {
+    color: #ff0000;
+    animation: moveIcons 1.2s linear infinite;
+    opacity: 0;
+}
+
+.loading-icons i:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.loading-icons i:nth-child(3) {
+    animation-delay: 0.8s;
+}
+
+.loading-text {
+    margin-top: 20px;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes moveIcons {
+    0% {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+</style>
+
+<script>
+window.addEventListener('load', function() {
+    const preloader = document.getElementById('preloader');
+    preloader.style.display = 'none';
+});
+</script>
     <!-- footer section start -->
     <footer>
         <div class="footer-content">

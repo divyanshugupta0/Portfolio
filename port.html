@@ -445,7 +445,30 @@ As a freelancer, I thrive on the dynamic nature of my work. Each project present
 <!-------------------------------------------------------------------Chatbot----------------------------------------------------------------------------------->
 
 
-
+<script src='https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js'></script>
+<script>
+  window.addEventListener("DOMContentLoaded", function() {
+    window.AgentInitializer.init({
+      agentRenderURL: "https://agent.jotform.com/0194f54bbb2171a9b4034f6473cd4aea4188",
+      rootId: "JotformAgent-0194f54bbb2171a9b4034f6473cd4aea4188",
+      formID: "0194f54bbb2171a9b4034f6473cd4aea4188",
+      queryParams: ["skipWelcome=1", "maximizable=1"],
+      domain: "https://www.jotform.com",
+      isDraggable: false,
+      background: "linear-gradient(180deg, #d0021b 0%, #ffffff 100%)",
+      buttonBackgroundColor: "#11111B",
+      buttonIconColor: "#ffffff",
+      variant: false,
+      customizations: {
+        "greeting": "Yes",
+        "greetingMessage": "Hi! How can I assist you?",
+        "pulse": "Yes",
+        "position": "right"
+      },
+      isVoice: undefined
+    });
+  });
+</script>
 
 
 

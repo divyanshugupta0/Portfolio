@@ -1,12 +1,12 @@
-        .popup-overlay {
+.popup-overlay {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(58, 57, 57, 0.447);
-            backdrop-filter: blur(10px);
+            background-color: rgba(185, 182, 182, 0);
+            backdrop-filter: blur(12px);
             z-index: 1000;
         }
 
@@ -25,6 +25,16 @@
             z-index: 1001;
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
             transition: transform 0.2s ease-out;
+        }
+
+        h2 {
+            color: rgb(248, 190, 190);
+            font-style: italic;
+            margin: 0 0 1rem;
+            font-weight: 600;
+            font-size: 1.75rem;
+
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .question {
@@ -278,7 +288,7 @@
 
         .image-options {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(2, 2fr); /* Modified for better mobile view */
             gap: 0.75rem;
             margin-bottom: 1.25rem;
         }
@@ -374,4 +384,21 @@
             0% { box-shadow: 0 0 20px rgba(255, 8, 8, 0.4); }
             50% { box-shadow: 0 0 30px rgba(255, 255, 255, 0.862); }
             100% { box-shadow: 0 0 20px rgba(238, 160, 3, 0.4); }
+        }
+
+        @media (max-width: 600px) {
+            .question{
+                color: rgba(255, 255, 255, 0.9);
+                margin-bottom: 1.25rem;
+                font-size: 18px;
+                line-height: 1.4
+            }
+            .image-options {
+                grid-template-columns: repeat(2, 2fr); /* Single column on smaller screens */
+            }
+            .popup-content {
+                width: 80%; /* Take up more width on smaller screens */
+                height: auto;
+                max-width: none; /* Remove max-width to allow full width */
+            }
         }

@@ -514,6 +514,7 @@ section .title::after{
     font-size: 25px;
     font-weight: 600;
     margin-bottom: 10px;
+    color: black;
 }
 .about .about-content .right .text span{
     color: crimson;

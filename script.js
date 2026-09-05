@@ -153,16 +153,10 @@ window.onload = function() {
 
         }, 1000);
 
-        setTimeout(() => {
-            notifications.showAnimated({
-                message: '<span style="color: red;">Notice:</span> 🎉🎉Arcade Section is Coming Soon......',
-                character: 'hurraydisney.png'
-            });
-        }, 5000);
     } else {
         setTimeout(() => {
             notifications.showAnimated({
-                message: '<span style="color: red;">Notice:</span> 🎉🎉Arcade Section is Coming Soon......',
+                message: '<span style="color: red;">Notice:</span> Something went wrong....',
                 character: 'hurraydisney.png'
             });
         }, 2000);
